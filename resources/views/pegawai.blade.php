@@ -129,6 +129,9 @@
             "url": "/data",
             success: function(data) {
                 dataPegawai = JSON.parse(data).data;
+                dataPegawai.sort(function (a, b) {
+                    return a.employee_age - b.employee_age;
+                });
                 console.log(dataPegawai);
                 // console.log(dataPegawai);
                 for (i = 0; i < dataPegawai.length; i++) {
