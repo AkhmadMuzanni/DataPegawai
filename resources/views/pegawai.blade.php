@@ -91,6 +91,14 @@
                 </div>
 
                 <div class="container">
+                    <div class="float-right">
+                        <button class="btn btn-primary">REFRESH</button>
+                        <button class="btn btn-success">SAVE</button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="container pt-3">
                     <table class="table" id="tabel-pegawai">
                         <thead class="thead-dark">
                             <tr>
