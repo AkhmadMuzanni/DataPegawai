@@ -16,3 +16,6 @@ Route::get('/', function () {
 });
 
 Route::get('/data', "PegawaiController@getData");
+Route::get('/saveData', "PegawaiController@store");
+
+Route::resource('pegawai', 'PegawaiController');

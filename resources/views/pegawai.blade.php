@@ -92,8 +92,8 @@
 
                 <div class="container">
                     <div class="float-right">
-                        <button class="btn btn-primary">REFRESH</button>
-                        <button class="btn btn-success">SAVE</button>
+                        <button class="btn btn-primary" id="btn-refresh">REFRESH</button>
+                        <button class="btn btn-success" id="btn-save">SAVE</button>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -115,44 +115,52 @@
                         </tbody>
                     </table>
                 </div>
-
-                <!-- <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div> -->
             </div>
         </div>
     </body>
     <script type="text/javascript">
         console.log('ksajsak');
 
-        $.ajax({
-            type: 'get',
-            "url": "/data",
-            success: function(data) {
-                dataPegawai = JSON.parse(data).data;
-                dataPegawai.sort(function (a, b) {
-                    return a.employee_age - b.employee_age;
-                });
-                console.log(dataPegawai);
-                // console.log(dataPegawai);
-                for (i = 0; i < dataPegawai.length; i++) {
-                    $('#tabel-pegawai').find('tbody').append('<tr>'+
-                    '<th scope=\'row\'>'+(i+1)+'</th>'+
-                    '<td>'+dataPegawai[i].id+'</td>'+
-                    '<td>'+dataPegawai[i].employee_name+'</td>'+
-                    '<td>'+dataPegawai[i].employee_salary+'</td>'+
-                    '<td>'+dataPegawai[i].employee_age+'</td>'+
-                    '<td>'+dataPegawai[i].profile_image+'</td>'+
-                    '</tr>')
-                }
-            }, 
+        getDataPegawai();
+
+        function getDataPegawai(){
+            $('#tabel-pegawai').find('tbody').empty();
+            $.ajax({
+                type: 'get',
+                "url": "/data",
+                success: function(data) {
+                    dataPegawai = JSON.parse(data).data;
+                    dataPegawai.sort(function (a, b) {
+                        return a.employee_age - b.employee_age;
+                    });
+                    console.log(dataPegawai);
+                    // console.log(dataPegawai);
+                    for (i = 0; i < dataPegawai.length; i++) {
+                        $('#tabel-pegawai').find('tbody').append('<tr>'+
+                        '<th scope=\'row\'>'+(i+1)+'</th>'+
+                        '<td>'+dataPegawai[i].id+'</td>'+
+                        '<td>'+dataPegawai[i].employee_name+'</td>'+
+                        '<td>'+dataPegawai[i].employee_salary+'</td>'+
+                        '<td>'+dataPegawai[i].employee_age+'</td>'+
+                        '<td>'+dataPegawai[i].profile_image+'</td>'+
+                        '</tr>')
+                    }
+                }, 
+            });
+        }
+
+        $("#btn-refresh").on('click', function(event) {
+            getDataPegawai();
+        });
+
+        $("#btn-save").on('click', function(event) {
+            $.ajax({
+                type: 'get',
+                "url": "/saveData",
+                success: function(data) {
+                    console.log('Save Data');
+                }, 
+            });
         });
     </script>
 </html>
